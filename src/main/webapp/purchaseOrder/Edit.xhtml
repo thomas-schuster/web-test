@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PurchaseOrderEditDlg" widgetVar="PurchaseOrderEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPurchaseOrderTitle}">
+            <h:form id="PurchaseOrderEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{purchaseOrderController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_orderNum}" for="orderNum" />
+                        <p:inputText id="orderNum" value="#{purchaseOrderController.selected.orderNum}" title="#{bundle.EditPurchaseOrderTitle_orderNum}" required="true" requiredMessage="#{bundle.EditPurchaseOrderRequiredMessage_orderNum}"/>
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_quantity}" for="quantity" />
+                        <p:inputText id="quantity" value="#{purchaseOrderController.selected.quantity}" title="#{bundle.EditPurchaseOrderTitle_quantity}" />
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_shippingCost}" for="shippingCost" />
+                        <p:inputText id="shippingCost" value="#{purchaseOrderController.selected.shippingCost}" title="#{bundle.EditPurchaseOrderTitle_shippingCost}" />
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_salesDate}" for="salesDate" />
+                        <p:calendar id="salesDate" pattern="MM/dd/yyyy" value="#{purchaseOrderController.selected.salesDate}" title="#{bundle.EditPurchaseOrderTitle_salesDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_shippingDate}" for="shippingDate" />
+                        <p:calendar id="shippingDate" pattern="MM/dd/yyyy" value="#{purchaseOrderController.selected.shippingDate}" title="#{bundle.EditPurchaseOrderTitle_shippingDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_freightCompany}" for="freightCompany" />
+                        <p:inputText id="freightCompany" value="#{purchaseOrderController.selected.freightCompany}" title="#{bundle.EditPurchaseOrderTitle_freightCompany}" />
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_customerId}" for="customerId" />
+                        <p:selectOneMenu id="customerId" value="#{purchaseOrderController.selected.customerId}" required="true" requiredMessage="#{bundle.EditPurchaseOrderRequiredMessage_customerId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="customerIdItem"
+                                           itemValue="#{customerIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPurchaseOrderLabel_productId}" for="productId" />
+                        <p:selectOneMenu id="productId" value="#{purchaseOrderController.selected.productId}" required="true" requiredMessage="#{bundle.EditPurchaseOrderRequiredMessage_productId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productController.itemsAvailableSelectOne}"
+                                           var="productIdItem"
+                                           itemValue="#{productIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{purchaseOrderController.update}" value="#{bundle.Save}" update="display,:PurchaseOrderListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PurchaseOrderEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PurchaseOrderEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

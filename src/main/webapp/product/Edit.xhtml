@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductEditDlg" widgetVar="ProductEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProductTitle}">
+            <h:form id="ProductEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProductLabel_productId}" for="productId" />
+                        <p:inputText id="productId" value="#{productController.selected.productId}" title="#{bundle.EditProductTitle_productId}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_productId}"/>
+                        <p:outputLabel value="#{bundle.EditProductLabel_purchaseCost}" for="purchaseCost" />
+                        <p:inputText id="purchaseCost" value="#{productController.selected.purchaseCost}" title="#{bundle.EditProductTitle_purchaseCost}" />
+                        <p:outputLabel value="#{bundle.EditProductLabel_quantityOnHand}" for="quantityOnHand" />
+                        <p:inputText id="quantityOnHand" value="#{productController.selected.quantityOnHand}" title="#{bundle.EditProductTitle_quantityOnHand}" />
+                        <p:outputLabel value="#{bundle.EditProductLabel_markup}" for="markup" />
+                        <p:inputText id="markup" value="#{productController.selected.markup}" title="#{bundle.EditProductTitle_markup}" />
+                        <p:outputLabel value="#{bundle.EditProductLabel_available}" for="available" />
+                        <p:inputText id="available" value="#{productController.selected.available}" title="#{bundle.EditProductTitle_available}" />
+                        <p:outputLabel value="#{bundle.EditProductLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{productController.selected.description}" title="#{bundle.EditProductTitle_description}" />
+                        <p:outputLabel value="#{bundle.EditProductLabel_manufacturerId}" for="manufacturerId" />
+                        <p:selectOneMenu id="manufacturerId" value="#{productController.selected.manufacturerId}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_manufacturerId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{manufacturerController.itemsAvailableSelectOne}"
+                                           var="manufacturerIdItem"
+                                           itemValue="#{manufacturerIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProductLabel_productCode}" for="productCode" />
+                        <p:selectOneMenu id="productCode" value="#{productController.selected.productCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_productCode}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{productCodeController.itemsAvailableSelectOne}"
+                                           var="productCodeItem"
+                                           itemValue="#{productCodeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productController.update}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

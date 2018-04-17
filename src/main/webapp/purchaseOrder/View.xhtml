@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PurchaseOrderViewDlg" widgetVar="PurchaseOrderViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPurchaseOrderTitle}">
+            <h:form id="PurchaseOrderViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{purchaseOrderController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_orderNum}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.orderNum}" title="#{bundle.ViewPurchaseOrderTitle_orderNum}"/>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_quantity}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.quantity}" title="#{bundle.ViewPurchaseOrderTitle_quantity}"/>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_shippingCost}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.shippingCost}" title="#{bundle.ViewPurchaseOrderTitle_shippingCost}"/>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_salesDate}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.salesDate}" title="#{bundle.ViewPurchaseOrderTitle_salesDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_shippingDate}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.shippingDate}" title="#{bundle.ViewPurchaseOrderTitle_shippingDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_freightCompany}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.freightCompany}" title="#{bundle.ViewPurchaseOrderTitle_freightCompany}"/>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_customerId}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.customerId}" title="#{bundle.ViewPurchaseOrderTitle_customerId}"/>
+                        <h:outputText value="#{bundle.ViewPurchaseOrderLabel_productId}"/>
+                        <h:outputText value="#{purchaseOrderController.selected.productId}" title="#{bundle.ViewPurchaseOrderTitle_productId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PurchaseOrderViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

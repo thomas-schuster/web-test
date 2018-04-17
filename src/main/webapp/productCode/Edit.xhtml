@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductCodeEditDlg" widgetVar="ProductCodeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProductCodeTitle}">
+            <h:form id="ProductCodeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productCodeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProductCodeLabel_prodCode}" for="prodCode" />
+                        <p:inputText id="prodCode" value="#{productCodeController.selected.prodCode}" title="#{bundle.EditProductCodeTitle_prodCode}" required="true" requiredMessage="#{bundle.EditProductCodeRequiredMessage_prodCode}"/>
+                        <p:outputLabel value="#{bundle.EditProductCodeLabel_discountCode}" for="discountCode" />
+                        <p:inputText id="discountCode" value="#{productCodeController.selected.discountCode}" title="#{bundle.EditProductCodeTitle_discountCode}" required="true" requiredMessage="#{bundle.EditProductCodeRequiredMessage_discountCode}"/>
+                        <p:outputLabel value="#{bundle.EditProductCodeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{productCodeController.selected.description}" title="#{bundle.EditProductCodeTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productCodeController.update}" value="#{bundle.Save}" update="display,:ProductCodeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductCodeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductCodeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

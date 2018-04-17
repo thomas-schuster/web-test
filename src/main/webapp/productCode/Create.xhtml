@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductCodeCreateDlg" widgetVar="ProductCodeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProductCodeTitle}">
+            <h:form id="ProductCodeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productCodeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProductCodeLabel_prodCode}" for="prodCode" />
+                        <p:inputText id="prodCode" value="#{productCodeController.selected.prodCode}" title="#{bundle.CreateProductCodeTitle_prodCode}" required="true" requiredMessage="#{bundle.CreateProductCodeRequiredMessage_prodCode}"/>
+                        <p:outputLabel value="#{bundle.CreateProductCodeLabel_discountCode}" for="discountCode" />
+                        <p:inputText id="discountCode" value="#{productCodeController.selected.discountCode}" title="#{bundle.CreateProductCodeTitle_discountCode}" required="true" requiredMessage="#{bundle.CreateProductCodeRequiredMessage_discountCode}"/>
+                        <p:outputLabel value="#{bundle.CreateProductCodeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{productCodeController.selected.description}" title="#{bundle.CreateProductCodeTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productCodeController.create}" value="#{bundle.Save}" update="display,:ProductCodeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductCodeCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductCodeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
