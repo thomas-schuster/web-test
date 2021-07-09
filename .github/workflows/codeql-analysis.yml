@@ -12,7 +12,8 @@
 name: "CodeQL"
 
 on:
-  - cron: '0 0 1 * *' # check once a month
+  schedule:
+    - cron: '0 0 1 * *' # check once a month
 
 jobs:
   analyze:
