@@ -1,4 +1,5 @@
 [![Java Build](https://github.com/thomas-schuster/web-test/actions/workflows/maven.yml/badge.svg)](https://github.com/thomas-schuster/web-test/actions/workflows/maven.yml)
+[![CodeQL](https://github.com/thomas-schuster/web-test/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/thomas-schuster/web-test/actions/workflows/codeql-analysis.yml)
 
 # web-test
 Sample Web Application (NetBeans Generator)
