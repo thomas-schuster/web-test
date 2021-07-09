@@ -1,3 +1,5 @@
+[![Java Build](https://github.com/thomas-schuster/web-test/actions/workflows/maven.yml/badge.svg)](https://github.com/thomas-schuster/web-test/actions/workflows/maven.yml)
+
 # web-test
 Sample Web Application (NetBeans Generator)
 
